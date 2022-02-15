@@ -144,7 +144,7 @@ func NewServer(addr string) *Server {
 
 func (s *Server) Send(msg string) {
 	s.broadcast <- Broadcast{
-		msg: []byte(fmt.Sprintf("[%s]", msg)),
+		msg:    []byte(fmt.Sprintf("[%s]", msg)),
 		remote: "srv",
 	}
 }
