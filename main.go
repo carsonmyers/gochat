@@ -31,6 +31,7 @@ func main() {
 		input, _ := reader.ReadString('\n')
 		nick := strings.TrimSpace(input)
 
+		// test the client with `netcat -l -p 9999 -c -e "cat"`
 		client := NewClient(connFlag, nick)
 		for {
 			msg, _ := reader.ReadString('\n')
@@ -38,10 +39,11 @@ func main() {
 		}
 	default:
 		if listenFlag == "" {
-			listenFlag = "localhost:9999"
+			listenFlag = "0.0.0.0:9999"
 		}
 
 		server := NewServer(listenFlag)
+		fmt.Printf("listening on %s\n", listenFlag)
 		for {
 			msg, _ := reader.ReadString('\n')
 			server.Send(strings.TrimSpace(msg))
